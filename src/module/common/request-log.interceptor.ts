@@ -10,7 +10,7 @@ import { ElasticsearchService } from '@nestjs/elasticsearch';
 import { LoggerService } from '../logger/logger.service';
 @Injectable()
 export class RequestLogInterceptor implements NestInterceptor {
-  constructor(private readonly elasticsearchService: ElasticsearchService) { }
+  // constructor(private readonly elasticsearchService: ElasticsearchService) { }
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
     const auth = request.headers.authorization ? true : false;
@@ -44,10 +44,10 @@ export class RequestLogInterceptor implements NestInterceptor {
         )}, execution_time: ${this.colorizeLogToYellow(
           String(executionTime) + `ms`,
         )}}`;
-        this.elasticsearchService.index({
-          index: 'logs1', // Tên index để lưu log
-          body: logEntry,
-        });
+        // this.elasticsearchService.index({
+        //   index: 'logs1', // Tên index để lưu log
+        //   body: logEntry,
+        // });
         console.log(log);
       }),
     );
